@@ -29,12 +29,12 @@ const BusinessFlowView = () => {
   return (
     <div className="p-8 h-full bg-[var(--bg-base)]">
       <div className="max-w-[1200px] mx-auto flex flex-col h-full gap-6">
-        <div className="flex flex-wrap gap-4 items-center justify-between bg-white border border-slate-200 rounded-[var(--radius-md)] p-4 shadow-sm">
+        <div className="flex flex-wrap gap-4 items-center justify-between app-card p-4">
           <div className="relative flex-1 min-w-[240px] max-w-md">
             <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} weight="bold" />
             <input
               type="text"
-              className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-[13px] outline-none focus:border-blue-500 focus:bg-white transition-colors"
+              className="app-input pl-9"
               placeholder="Tìm kiếm business flow..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -43,9 +43,9 @@ const BusinessFlowView = () => {
           
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-[13px] font-semibold text-slate-500 uppercase tracking-wider">Analysis Run:</span>
+              <span className="app-label mb-0">Analysis Run:</span>
               <select
-                className="w-[260px] px-3 py-2 bg-white border border-slate-300 rounded-lg text-[13px] text-slate-700 outline-none focus:border-blue-500 shadow-sm"
+                className="app-input w-[260px]"
                 value={selectedRunId}
                 onChange={(e) => setSelectedRunId(e.target.value)}
               >
@@ -61,7 +61,7 @@ const BusinessFlowView = () => {
               </select>
             </div>
             <button
-              className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-lg text-[13px] font-semibold text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors shadow-sm disabled:opacity-50"
+              className="app-btn-secondary px-4 py-2 hover:text-[var(--color-primary)] disabled:opacity-50"
               onClick={() => refetch()}
               disabled={isLoading || !selectedRunId}
             >
@@ -79,12 +79,12 @@ const BusinessFlowView = () => {
 
         <div className="flex-1 overflow-auto">
           {isLoading && businessFlows.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-[400px] bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm">
-              <SpinnerGap size={40} className="animate-spin text-blue-500 mb-4" />
-              <span className="text-[15px] font-medium text-slate-600">Đang tải danh sách business flows...</span>
+            <div className="flex flex-col items-center justify-center app-card h-[400px]">
+              <SpinnerGap size={40} className="animate-spin text-[var(--color-primary)] mb-4" />
+              <span className="text-[15px] font-medium text-[var(--text-secondary)]">Đang tải danh sách business flows...</span>
             </div>
           ) : filtered.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-[400px] bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm text-center">
+            <div className="app-card h-[400px] app-empty-state">
               <Database size={64} weight="duotone" className="text-slate-300 mb-4" />
               <div className="text-[16px] font-semibold text-slate-800 mb-1">
                 {businessFlows.length === 0 ? "Chưa có business flow nào" : "Không tìm thấy kết quả"}
@@ -100,25 +100,25 @@ const BusinessFlowView = () => {
               {filtered.map((feature) => (
                 <div
                   key={feature.id}
-                  className="bg-white border border-slate-200 rounded-[var(--radius-md)] p-5 shadow-sm hover:shadow-md hover:border-blue-300 transition-all cursor-pointer group flex flex-col h-[220px]"
+                  className="bg-[var(--bg-subtle)] border border-[var(--border-default)] rounded-[var(--radius-md)] p-5 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:border-[#cbd5e1] transition-all cursor-pointer group flex flex-col h-[220px]"
                 >
-                  <div className="text-[16px] font-bold text-slate-900 tracking-tight group-hover:text-blue-600 transition-colors line-clamp-1 mb-1">
+                  <div className="text-[16px] font-bold text-[var(--text-primary)] tracking-tight group-hover:text-[var(--color-primary)] transition-colors line-clamp-1 mb-1">
                     {feature.businessName}
                   </div>
-                  <div className="text-[11px] font-mono text-slate-400 mb-3 bg-slate-50 px-2 py-1 rounded inline-block self-start border border-slate-100">
+                  <div className="text-[11px] font-mono text-[var(--text-muted)] mb-3 bg-[var(--surface-muted)] px-2 py-1 rounded inline-block self-start border border-[var(--border-default)]">
                     {feature.id}
                   </div>
                   
-                  <div className="text-[13px] text-slate-600 leading-relaxed flex-1 line-clamp-3">
+                  <div className="text-[13px] text-[var(--text-secondary)] leading-relaxed flex-1 line-clamp-3">
                     {feature.description || <span className="italic opacity-50">Không có mô tả</span>}
                   </div>
                   
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
+                  <div className="mt-4 pt-4 border-t border-[var(--border-default)] flex items-center justify-between">
+                    <span className="text-[11px] font-semibold text-[var(--text-muted)] uppercase tracking-wider">
                       {feature.createdAt ? new Date(feature.createdAt).toLocaleDateString("vi-VN") : ""}
                     </span>
                     <button
-                      className="px-3 py-1.5 bg-blue-50 text-blue-600 rounded-md text-xs font-bold uppercase tracking-wider hover:bg-blue-100 transition-colors"
+                      className="px-3 py-1.5 bg-[#0B3D9114] text-[var(--color-primary)] rounded-md text-xs font-bold uppercase tracking-wider hover:bg-[#0B3D9129] transition-colors"
                       onClick={(e) => {
                         e.stopPropagation();
                         const encodedRepoId = repoId ? encodeURIComponent(repoId) : "";

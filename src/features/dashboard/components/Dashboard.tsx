@@ -14,21 +14,21 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col h-full bg-[var(--bg-base)]">
       {/* Top bar */}
-      <header className="h-[64px] px-8 flex items-center justify-between border-b border-slate-200 bg-white flex-shrink-0">
+      <header className="app-page-header">
         <div>
-          <h1 className="text-[17px] font-bold text-slate-900 tracking-tight font-sans">
+          <h1 className="app-page-title">
             {currentTab === "repos"
               ? "Quản lý Repository"
               : "Ngân hàng câu hỏi mẫu (Few-Shot)"}
           </h1>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="app-page-subtitle">
             {currentTab === "repos"
               ? "Phân tích static code và theo dõi lịch sử chạy"
               : "Quản lý danh sách câu hỏi và câu trả lời mẫu cho AI"}
           </p>
         </div>
         <div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs text-slate-600 font-mono transition-colors hover:border-slate-300 hover:text-slate-800">
+          <div className="flex items-center gap-1.5 px-3 py-1.5 bg-[var(--bg-subtle)] border border-[var(--border-default)] rounded-full text-xs text-[var(--text-secondary)] font-mono transition-colors hover:border-[#cbd5e1] hover:text-[var(--text-primary)]">
             <CheckCircle size={12} weight="fill" className="text-green-500" />
             {serverUrl}
           </div>

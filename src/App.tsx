@@ -2,6 +2,7 @@ import { X } from "@phosphor-icons/react";
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './features/auth/components/Login';
+import LandingPage from './features/landing/LandingPage';
 import DashboardLayout from './components/layout/DashboardLayout';
 import Dashboard from './features/dashboard/components/Dashboard';
 import Workspace from './features/repo-workspace/components/Workspace';
@@ -40,7 +41,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />} />

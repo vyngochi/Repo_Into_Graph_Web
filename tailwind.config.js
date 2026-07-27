@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Google Sans', 'Montserrat', 'system-ui', 'sans-serif'],
+        sans: ['Montserrat', 'Google Sans', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'Geist Mono', 'monospace'],
       },
     },

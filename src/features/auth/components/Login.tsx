@@ -22,7 +22,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center w-full h-full bg-[var(--bg-base)]">
-      <div className="w-[400px] bg-white rounded-2xl border border-[var(--border-default)] shadow-md p-8">
+      <div className="w-[400px] app-card p-8">
         
         {/* Logo Section */}
         <div className="flex items-center gap-3 mb-8">
@@ -41,12 +41,12 @@ const Login = () => {
 
         {/* Server URL Input */}
         <div className="mb-6">
-          <label className="block text-[12px] font-semibold text-[var(--text-secondary)] mb-2 tracking-wide uppercase">
+          <label className="app-label">
             Địa chỉ Backend Server
           </label>
           <input
             type="text"
-            className="w-full px-4 py-2.5 bg-[var(--surface-muted)] border border-[var(--border-default)] rounded-[var(--radius-sm)] text-[var(--text-primary)] font-mono text-[13px] outline-none transition-colors focus:border-[var(--color-primary)] focus:ring-2 focus:ring-[#0B3D9114]"
+            className="app-input app-input-mono"
             value={inputUrl}
             onChange={(e) => setInputUrl(e.target.value)}
             placeholder="http://localhost:55061"
@@ -60,13 +60,13 @@ const Login = () => {
         {/* Action Buttons */}
         <div className="flex flex-col gap-2 mt-2">
           <button 
-            className="flex items-center justify-center w-full py-3 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-white rounded-[var(--radius-sm)] font-sans font-semibold text-[14px] transition-all hover:-translate-y-[1px] shadow-sm active:translate-y-0"
+            className="app-btn-primary w-full py-3 text-[14px] bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)]"
             onClick={handleLogin}
           >
             Đăng nhập
           </button>
           <button
-            className="flex items-center justify-center w-full py-2.5 bg-transparent border border-[var(--color-secondary)] text-[var(--color-secondary)] hover:bg-[#0F513110] rounded-[var(--radius-sm)] font-sans font-medium text-[13px] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="app-btn-secondary w-full py-2.5"
             onClick={handleTestConnection}
             disabled={checkHealthMutation.isPending}
           >

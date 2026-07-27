@@ -1,14 +1,13 @@
-import axios from 'axios';
+import axios from "axios";
 
 // Lấy base URL từ biến môi trường của Vite (.env)
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:5246';
+const baseURL = import.meta.env.VITE_API_URL || "http://localhost:5246";
 
 export const apiClient = axios.create({
   baseURL,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
-  timeout: 30000,
 });
 
 // Thêm interceptors nếu cần thiết
@@ -23,7 +22,7 @@ apiClient.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 apiClient.interceptors.response.use(
@@ -31,7 +30,7 @@ apiClient.interceptors.response.use(
     return response.data; // Trả về data trực tiếp cho dễ dùng
   },
   (error) => {
-    console.error('API Error:', error.response?.data || error.message);
+    console.error("API Error:", error.response?.data || error.message);
     return Promise.reject(error);
-  }
+  },
 );

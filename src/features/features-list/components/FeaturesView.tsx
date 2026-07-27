@@ -166,16 +166,16 @@ const FeaturesView = () => {
             onMouseDown={() => setIsResizingPanel(true)}
             className={`absolute top-0 -right-1 bottom-0 w-2 cursor-col-resize z-[10001] transition-colors ${isResizingPanel ? 'bg-blue-500' : 'bg-transparent'}`}
           />
-          <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex justify-between items-center">
+          <div className="px-6 py-4 border-b border-[var(--border-default)] bg-[var(--bg-subtle)] flex justify-between items-center">
             <div>
-              <div className="text-base font-semibold text-slate-800 mb-1">
-                {selectedNodeCode.className}.<span className="text-blue-500">{selectedNodeCode.method}</span>
+              <div className="text-base font-semibold text-[var(--text-primary)] mb-1">
+                {selectedNodeCode.className}.<span className="text-[var(--color-primary)]">{selectedNodeCode.method}</span>
               </div>
-              <div className="text-xs text-slate-500 font-mono">{selectedNodeCode.filePath}</div>
+              <div className="text-xs text-[var(--text-secondary)] font-mono">{selectedNodeCode.filePath}</div>
             </div>
             <button
               onClick={() => setSelectedNodeCode(null)}
-              className="p-2 rounded-full text-slate-400 hover:bg-slate-200 hover:text-slate-600 transition-colors"
+              className="p-2 rounded-full text-[var(--text-muted)] hover:bg-[var(--bg-base)] hover:text-[var(--text-primary)] transition-colors"
             >
               <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -209,23 +209,23 @@ const FeaturesView = () => {
 
       {/* Left panel - Features List */}
       {!isGraphFullscreen && (
-        <div className="w-[320px] flex-shrink-0 flex flex-col bg-white/65 backdrop-blur-md border border-white/40 rounded-[var(--radius-md)] shadow-sm overflow-hidden h-full">
-          <div className="p-4 border-b border-slate-200/60 bg-white/40">
+        <div className="w-[320px] flex-shrink-0 flex flex-col bg-[var(--bg-subtle)] border border-[var(--border-default)] rounded-[var(--radius-md)] shadow-[var(--shadow-card)] overflow-hidden h-full">
+          <div className="p-4 border-b border-[var(--border-default)] bg-[var(--bg-base)]">
             <div className="flex items-center gap-2 mb-1">
-              <div className="w-6 h-6 rounded bg-blue-50 text-blue-600 flex items-center justify-center">
+              <div className="w-6 h-6 rounded bg-blue-50 text-[var(--color-primary)] flex items-center justify-center">
                 <TreeStructure size={14} weight="bold" />
               </div>
-              <div className="font-semibold text-slate-800 text-[15px]">Features</div>
+              <div className="font-semibold text-[var(--text-primary)] text-[15px]">Features</div>
             </div>
-            <p className="text-xs text-slate-500">Chọn một feature để xem chi tiết.</p>
+            <p className="text-xs text-[var(--text-secondary)]">Chọn một feature để xem chi tiết.</p>
           </div>
           
-          <div className="p-4 flex flex-col gap-3 border-b border-slate-200/60 bg-white/20">
+          <div className="p-4 flex flex-col gap-3 border-b border-[var(--border-default)] bg-[var(--bg-base)]">
             <div className="relative">
-              <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} weight="bold" />
+              <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={14} weight="bold" />
               <input
                 type="text"
-                className="w-full pl-8 pr-3 py-1.5 bg-white border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500"
+                className="app-input py-1.5 pl-8"
                 placeholder="Tìm kiếm feature..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -233,9 +233,9 @@ const FeaturesView = () => {
             </div>
             
             <div>
-              <label className="block text-[11px] text-slate-500 mb-1 font-semibold uppercase tracking-wider">Lọc theo Analysis Run</label>
+              <label className="app-label mb-1 mt-2">Lọc theo Analysis Run</label>
               <select
-                className="w-full px-2 py-1.5 bg-white border border-slate-300 rounded-md text-xs outline-none focus:border-blue-500"
+                className="app-input py-1.5"
                 value={selectedRunId}
                 onChange={(e) => { setSelectedRunId(e.target.value); setSelectedFeatureId(null); }}
               >
@@ -254,8 +254,8 @@ const FeaturesView = () => {
               </div>
             ) : features.length === 0 ? (
               <div className="flex flex-col items-center justify-center h-full text-center p-4">
-                <div className="font-semibold text-slate-700 text-sm">Chưa có flow nào</div>
-                <div className="text-xs text-slate-500 mt-1">Hãy phân tích repository trước.</div>
+                <div className="font-semibold text-[var(--text-primary)] text-sm">Chưa có flow nào</div>
+                <div className="text-xs text-[var(--text-secondary)] mt-1">Hãy phân tích repository trước.</div>
               </div>
             ) : (
               <div className="flex flex-col gap-1">
@@ -279,12 +279,12 @@ const FeaturesView = () => {
       )}
 
       {/* Right panel - Detail View */}
-      <div className="flex-1 flex flex-col bg-white/65 backdrop-blur-md border border-white/40 rounded-[var(--radius-md)] shadow-sm overflow-hidden h-full">
+      <div className="flex-1 flex flex-col bg-[var(--bg-subtle)] border border-[var(--border-default)] rounded-[var(--radius-md)] shadow-[var(--shadow-card)] overflow-hidden h-full">
         {!selectedFeatureId ? (
           <div className="flex flex-col items-center justify-center h-full text-center">
-            <Database size={48} weight="duotone" className="text-slate-300 mb-3" />
-            <div className="font-semibold text-slate-700 text-sm">Chưa chọn Feature</div>
-            <div className="text-xs text-slate-500 mt-1">Chọn một flow từ danh sách bên trái để xem chi tiết.</div>
+            <Database size={48} weight="duotone" className="text-[var(--text-muted)] mb-3" />
+            <div className="font-semibold text-[var(--text-primary)] text-sm">Chưa chọn Feature</div>
+            <div className="text-xs text-[var(--text-secondary)] mt-1">Chọn một flow từ danh sách bên trái để xem chi tiết.</div>
           </div>
         ) : isDetailLoading ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400">
@@ -293,14 +293,14 @@ const FeaturesView = () => {
           </div>
         ) : featureDetail ? (
           <div className="flex flex-col h-full overflow-hidden">
-            <div className="p-5 border-b border-slate-200/60 flex justify-between items-start flex-wrap gap-4 bg-white/40">
+            <div className="p-5 border-b border-[var(--border-default)] flex justify-between items-start flex-wrap gap-4 bg-[var(--bg-base)]">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-[10px] font-bold uppercase tracking-wider">Feature</span>
-                  <span className="text-xs font-mono text-slate-400">{featureDetail.id}</span>
+                  <span className="text-xs font-mono text-[var(--text-muted)]">{featureDetail.id}</span>
                 </div>
-                <h2 className="text-lg font-bold text-slate-900 tracking-tight">{featureDetail.name}</h2>
-                {featureDetail.description && <p className="text-[13px] text-slate-500 mt-1 max-w-2xl">{featureDetail.description}</p>}
+                <h2 className="text-lg font-bold text-[var(--text-primary)] tracking-tight">{featureDetail.name}</h2>
+                {featureDetail.description && <p className="text-[13px] text-[var(--text-secondary)] mt-1 max-w-2xl">{featureDetail.description}</p>}
               </div>
               
               <div className="flex gap-1 p-1 bg-black/5 rounded-lg">
@@ -320,7 +320,7 @@ const FeaturesView = () => {
               </div>
             </div>
 
-            <div className="flex-1 overflow-auto p-5 relative bg-white/20">
+            <div className="flex-1 overflow-auto p-5 relative bg-[var(--bg-base)]">
               {activeViewTab === "graph" ? (
                 <div className="flex flex-col h-full">
                   <div className="flex justify-between items-center px-4 py-2 bg-indigo-50/50 border border-indigo-100 rounded-lg mb-4 text-[13px]">

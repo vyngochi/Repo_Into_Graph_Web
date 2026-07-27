@@ -40,18 +40,18 @@ const Workspace = () => {
 
   return (
     <div className="flex flex-col h-full bg-[var(--bg-base)]">
-      <header className="h-[64px] px-8 flex items-center justify-between border-b border-slate-200 bg-white flex-shrink-0">
+      <header className="app-page-header">
         <div>
-          <h1 className="text-[17px] font-bold text-slate-900 tracking-tight font-sans">
+          <h1 className="app-page-title">
             {currentTab.pageTitle}
           </h1>
-          <p className="text-[11px] text-slate-500 font-mono mt-0.5 truncate max-w-[600px]">
+          <p className="app-page-subtitle truncate max-w-[600px]">
             {repoId ? decodeURIComponent(repoId) : 'Chưa chọn repository'}
           </p>
         </div>
         <div>
           <button
-            className="flex items-center gap-2 px-3 py-1.5 bg-white border border-slate-200 rounded-full text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50 hover:border-slate-300"
+            className="app-btn-secondary px-3 py-1.5 rounded-full"
             onClick={() => navigate('/dashboard')}
             title="Quay lại Dashboard"
           >

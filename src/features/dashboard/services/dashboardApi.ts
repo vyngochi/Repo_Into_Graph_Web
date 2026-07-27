@@ -9,19 +9,15 @@ export const dashboardApi = {
     return data.items || [];
   },
 
-  updateAnalysisRun: async (
-    baseUrl: string,
-    id: string,
-    payload: Partial<AnalysisRun>,
-  ) => {
+  updateAnalysisRun: async (id: string, payload: Partial<AnalysisRun>) => {
     return apiClient.put(`/api/analysis-runs/${id}`, payload);
   },
 
-  analyzeRepo: async (
-    baseUrl: string,
-    payload: { repositoryPath: string; outputDir?: string | null },
-  ) => {
-    return apiClient.post(`/api/analysis`, payload);
+  analyzeRepo: async (payload: {
+    repositoryPath: string;
+    outputDir?: string | null;
+  }) => {
+    return apiClient.post(`/api/analysis/analyze`, payload);
   },
 
   getFewShots: async (baseUrl: string): Promise<FewShot[]> => {
@@ -29,19 +25,15 @@ export const dashboardApi = {
     return data.items || [];
   },
 
-  createFewShot: async (baseUrl: string, payload: Omit<FewShot, "id">) => {
+  createFewShot: async (payload: Omit<FewShot, "id">) => {
     return apiClient.post(`/api/fewshot`, payload);
   },
 
-  updateFewShot: async (
-    baseUrl: string,
-    id: string,
-    payload: Partial<FewShot>,
-  ) => {
+  updateFewShot: async (id: string, payload: Partial<FewShot>) => {
     return apiClient.put(`/api/fewshot/${id}`, payload);
   },
 
-  deleteFewShot: async (baseUrl: string, id: string) => {
+  deleteFewShot: async (id: string) => {
     return apiClient.delete(`/api/fewshot/${id}`);
   },
 };

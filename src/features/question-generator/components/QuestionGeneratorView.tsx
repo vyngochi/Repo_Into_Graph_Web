@@ -110,21 +110,21 @@ const QuizGeneratorView = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-[1400px] mx-auto h-full">
         {/* Left: Form */}
         <div className="lg:col-span-5 flex flex-col gap-6 overflow-y-auto pr-2 pb-6">
-          <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm p-6 flex flex-col gap-5">
+          <div className="app-card p-6 flex flex-col gap-5">
             <div>
               <div className="flex items-center gap-3 mb-2">
                 <div className="w-10 h-10 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
                   <Question size={20} weight="fill" />
                 </div>
-                <div className="text-[16px] font-bold text-slate-900 tracking-tight">Tạo câu hỏi tự động</div>
+                <div className="text-[16px] font-bold text-[var(--text-primary)] tracking-tight">Tạo câu hỏi tự động</div>
               </div>
-              <p className="text-[13px] text-slate-500">Dùng AI sinh câu hỏi từ Business Flow</p>
+              <p className="text-[13px] text-[var(--text-secondary)]">Dùng AI sinh câu hỏi từ Business Flow</p>
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Lần phân tích (Analysis Run)</label>
+              <label className="app-label">Lần phân tích (Analysis Run)</label>
               <select
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500 focus:bg-white"
+                className="app-input"
                 value={selectedRunId}
                 onChange={(e) => setSelectedRunId(e.target.value)}
               >
@@ -137,14 +137,14 @@ const QuizGeneratorView = () => {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Business Flow</label>
+              <label className="app-label">Business Flow</label>
               {isLoadingFlows ? (
-                <div className="flex items-center gap-2 text-[13px] text-slate-500 py-2">
-                  <SpinnerGap size={16} className="animate-spin text-blue-500" /> Đang tải danh sách...
+                <div className="flex items-center gap-2 text-[13px] text-[var(--text-secondary)] py-2">
+                  <SpinnerGap size={16} className="animate-spin text-[var(--color-primary)]" /> Đang tải danh sách...
                 </div>
               ) : (
                 <select
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500 focus:bg-white"
+                  className="app-input"
                   value={selectedFlow?.id || ""}
                   onChange={(e) => setSelectedFlow(businessFlows.find((f) => f.id === e.target.value) || null)}
                 >
@@ -157,7 +157,7 @@ const QuizGeneratorView = () => {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Độ khó mong muốn</label>
+              <label className="app-label">Độ khó mong muốn</label>
               <div className="flex gap-2">
                 {(["Easy", "Medium", "Hard"] as const).map((d) => (
                   <button
@@ -176,10 +176,10 @@ const QuizGeneratorView = () => {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Số lượng câu hỏi</label>
+              <label className="app-label">Số lượng câu hỏi</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500 focus:bg-white"
+                className="app-input"
                 min={1} max={20}
                 value={numQuestions}
                 onChange={(e) => setNumQuestions(Math.max(1, Math.min(20, parseInt(e.target.value) || 5)))}
@@ -188,14 +188,14 @@ const QuizGeneratorView = () => {
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Câu hỏi mẫu (Few-Shot)</label>
-                {selectedFewShots.length > 0 && <span className="text-[11px] font-bold text-blue-600">Đã chọn {selectedFewShots.length}</span>}
+                <label className="app-label mb-0">Câu hỏi mẫu (Few-Shot)</label>
+                {selectedFewShots.length > 0 && <span className="text-[11px] font-bold text-[var(--color-primary)]">Đã chọn {selectedFewShots.length}</span>}
               </div>
               <div className="relative mb-3">
-                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={14} weight="bold" />
+                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" size={14} weight="bold" />
                 <input
                   type="text"
-                  className="w-full pl-8 pr-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500 focus:bg-white"
+                  className="app-input pl-8"
                   placeholder="Tìm câu hỏi hoặc tag..."
                   value={fewShotSearch}
                   onChange={(e) => setFewShotSearch(e.target.value)}
@@ -235,9 +235,9 @@ const QuizGeneratorView = () => {
             </div>
 
             <div>
-              <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Ngữ cảnh bổ sung <span className="lowercase font-normal opacity-70">(tùy chọn)</span></label>
+              <label className="app-label">Ngữ cảnh bổ sung <span className="lowercase font-normal opacity-70">(tùy chọn)</span></label>
               <textarea
-                className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-blue-500 focus:bg-white resize-y min-h-[80px]"
+                className="app-input min-h-[80px]"
                 placeholder="Thêm hướng dẫn, văn phong hoặc yêu cầu đặc biệt..."
                 value={additionalContext}
                 onChange={(e) => setAdditionalContext(e.target.value)}
@@ -245,7 +245,7 @@ const QuizGeneratorView = () => {
             </div>
 
             <button
-              className="w-full py-3 mt-4 bg-[var(--color-primary)] text-white text-sm font-semibold rounded-md hover:bg-[var(--color-primary-hover)] flex items-center justify-center transition-all disabled:opacity-50"
+              className="app-btn-primary w-full py-3 mt-4 text-[14px]"
               onClick={handleGenerate}
               disabled={isLoading || !selectedFlow}
             >
@@ -258,28 +258,28 @@ const QuizGeneratorView = () => {
         {/* Right: Results */}
         <div className="lg:col-span-7 flex flex-col h-full overflow-hidden">
           {!isLoading && generatedQuestions.length === 0 && (
-            <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm flex flex-col items-center justify-center h-full text-center p-8">
-              <Database size={64} weight="duotone" className="text-slate-300 mb-4" />
-              <div className="text-[16px] font-bold text-slate-800 mb-2">Chưa có câu hỏi nào được sinh ra</div>
-              <div className="text-[13px] text-slate-500 max-w-sm">
+            <div className="app-card flex flex-col items-center justify-center h-full app-empty-state p-8">
+              <Database size={64} weight="duotone" className="text-[var(--text-muted)] mb-4" />
+              <div className="text-[16px] font-bold text-[var(--text-secondary)] mb-2">Chưa có câu hỏi nào được sinh ra</div>
+              <div className="text-[13px] text-[var(--text-muted)] max-w-sm mt-2">
                 Chọn Business Flow và thiết lập tham số ở cột trái, sau đó nhấn <strong>Tạo câu hỏi</strong> để bắt đầu sinh.
               </div>
             </div>
           )}
 
           {isLoading && (
-            <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm flex flex-col items-center justify-center h-full">
-              <SpinnerGap size={40} className="animate-spin text-blue-500 mb-4" />
-              <span className="text-[15px] font-medium text-slate-600">Đang sinh câu hỏi từ AI...</span>
+            <div className="app-card flex flex-col items-center justify-center h-full">
+              <SpinnerGap size={40} className="animate-spin text-[var(--color-primary)] mb-4" />
+              <span className="text-[15px] font-medium text-[var(--text-secondary)]">Đang sinh câu hỏi từ AI...</span>
             </div>
           )}
 
           {!isLoading && generatedQuestions.length > 0 && (
-            <div className="flex flex-col h-full overflow-hidden bg-white border border-slate-200 rounded-[var(--radius-md)] shadow-sm">
-              <div className="p-5 border-b border-slate-200 flex justify-between items-center bg-slate-50">
-                <h3 className="text-base font-bold text-slate-900 m-0">Danh sách câu hỏi sinh ra ({generatedQuestions.length})</h3>
+            <div className="flex flex-col h-full overflow-hidden app-card p-0">
+              <div className="p-5 border-b border-[var(--border-default)] flex justify-between items-center bg-[var(--bg-subtle)]">
+                <h3 className="text-base font-bold text-[var(--text-primary)] m-0">Danh sách câu hỏi sinh ra ({generatedQuestions.length})</h3>
                 <button
-                  className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm disabled:opacity-50"
+                  className="app-btn-secondary px-4 py-2 disabled:opacity-50"
                   onClick={handleAssessQuality}
                   disabled={isAssessing}
                 >

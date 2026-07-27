@@ -32,7 +32,7 @@ const GraphScreen = () => {
   return (
     <div className="flex flex-col h-full relative bg-slate-50/50">
       {/* Floating Glassmorphism Tab bar */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[100] flex gap-2 bg-white/80 backdrop-blur-md p-1.5 rounded-full border border-slate-200 shadow-sm">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[100] flex gap-2 bg-[var(--bg-subtle)] backdrop-blur-md p-1.5 rounded-full border border-[var(--border-default)] shadow-[var(--shadow-card)]">
         <button className={getTabClass("graph")} onClick={() => setActiveTab("graph")}>
           Interactive Graph
         </button>
@@ -121,20 +121,20 @@ const CoreFlowTab = ({
     <div className="flex-1 overflow-y-auto px-8 pt-20 pb-8 bg-slate-50/50">
       <div className="max-w-[1200px] mx-auto grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-8 items-start">
         {/* Left Search panel */}
-        <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] p-6 shadow-sm sticky top-0">
+        <div className="app-card p-6 sticky top-0">
           <div className="flex items-center gap-3 mb-2">
             <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-lg">
               /
             </div>
-            <div className="text-base font-bold text-slate-900">Core Flow</div>
+            <div className="text-base font-bold text-[var(--text-primary)]">Core Flow</div>
           </div>
-          <p className="text-[13px] text-slate-500 mb-6">Xem danh sách các file dự án và sự phụ thuộc giữa các file.</p>
+          <p className="text-[13px] text-[var(--text-secondary)] mb-6">Xem danh sách các file dự án và sự phụ thuộc giữa các file.</p>
           
           <div className="mb-4">
-            <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Tìm kiếm file</label>
+            <label className="app-label">Tìm kiếm file</label>
             <input
               type="text"
-              className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none focus:border-indigo-500 focus:bg-white transition-colors"
+              className="app-input"
               placeholder="Tìm theo tên file..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -142,8 +142,8 @@ const CoreFlowTab = ({
           </div>
           
           <div className="mb-6">
-            <label className="block text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-2">Định dạng file</label>
-            <select className="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-md text-[13px] outline-none text-slate-700">
+            <label className="app-label">Định dạng file</label>
+            <select className="app-input">
               <option>Tất cả định dạng</option>
             </select>
           </div>
@@ -160,7 +160,7 @@ const CoreFlowTab = ({
           </div>
           
           <button
-            className="w-full py-2.5 bg-indigo-600 text-white rounded-md text-[13px] font-semibold hover:bg-indigo-700 flex items-center justify-center transition-colors disabled:opacity-50"
+            className="app-btn-primary w-full py-2.5"
             onClick={() => handleLoad()}
             disabled={isLoading}
           >
@@ -172,26 +172,26 @@ const CoreFlowTab = ({
         {/* Right timeline result */}
         <div className="flex flex-col gap-6">
           {!codeFlow && !isLoading && (
-            <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] p-12 text-center shadow-sm flex flex-col items-center justify-center">
-              <Database size={48} weight="duotone" className="text-slate-300 mb-4" />
-              <div className="text-[15px] font-semibold text-slate-800 mb-1">Mở một Workspace để bắt đầu</div>
-              <div className="text-[13px] text-slate-500 max-w-sm">
+            <div className="app-card p-12 app-empty-state">
+              <Database size={48} weight="duotone" className="text-[var(--text-muted)] mb-4" />
+              <div className="text-[15px] font-semibold text-[var(--text-secondary)] mb-1">Mở một Workspace để bắt đầu</div>
+              <div className="text-[13px] text-[var(--text-muted)] max-w-sm">
                 Core Flow sẽ tự động phân tích và hiển thị cấu trúc các file dự án.
               </div>
             </div>
           )}
           
           {isLoading && (
-            <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] p-12 text-center shadow-sm flex flex-col items-center justify-center h-[300px]">
-              <SpinnerGap size={40} className="animate-spin text-indigo-500 mb-4" />
-              <span className="text-[14px] font-medium text-slate-600">Đang tải Core Flow...</span>
+            <div className="app-card p-12 flex flex-col items-center justify-center h-[300px]">
+              <SpinnerGap size={40} className="animate-spin text-[var(--color-primary)] mb-4" />
+              <span className="text-[14px] font-medium text-[var(--text-secondary)]">Đang tải Core Flow...</span>
             </div>
           )}
 
           {codeFlow && files.length === 0 && (
-            <div className="bg-white border border-slate-200 rounded-[var(--radius-md)] p-12 text-center shadow-sm">
-              <div className="text-[15px] font-semibold text-slate-800 mb-1">Không tìm thấy thông tin cấu trúc file</div>
-              <div className="text-[13px] text-slate-500 max-w-sm mx-auto">
+            <div className="app-card p-12 app-empty-state">
+              <div className="text-[15px] font-semibold text-[var(--text-secondary)] mb-1">Không tìm thấy thông tin cấu trúc file</div>
+              <div className="text-[13px] text-[var(--text-muted)] max-w-sm mx-auto">
                 Thư mục này không chứa thông tin file và sự phụ thuộc hoặc chưa được phân tích đúng.
               </div>
             </div>
@@ -261,7 +261,7 @@ const FileDependencyCard = ({
   }, [isOpen, sourceCode, isLoadingCode, filePath, selectedRepoPath]);
 
   return (
-    <div className={`bg-white border ${isOpen ? 'border-indigo-300 shadow-md' : 'border-slate-200 shadow-sm'} rounded-xl overflow-hidden transition-all duration-200`}>
+    <div className={`bg-[var(--bg-subtle)] border ${isOpen ? 'border-[var(--color-primary)] shadow-[var(--shadow-card-hover)]' : 'border-[var(--border-default)] shadow-[var(--shadow-card)]'} rounded-[var(--radius-md)] overflow-hidden transition-all duration-200`}>
       <div
         className={`px-5 py-4 flex justify-between items-center cursor-pointer transition-colors ${isOpen ? 'bg-indigo-50/50' : 'hover:bg-slate-50'}`}
         onClick={() => setIsOpen(!isOpen)}
